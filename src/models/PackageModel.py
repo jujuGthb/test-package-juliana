@@ -1,4 +1,3 @@
-PackageModel.py:
 from pydantic import validator
 from typing import List, Optional, Union, Literal
 from sdks.novavision.src.base.model import (
