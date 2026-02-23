@@ -238,7 +238,7 @@ class SecondExecutorConfigs(Configs):
     filter: FilterOperation
 
 class FirstExecutorRequest(Request):
-    inputs: Optional[FirstExecutorInputs]
+    inputs: FirstExecutorInputs
     configs: FirstExecutorConfigs
 
     class Config:
@@ -248,7 +248,7 @@ class FirstExecutorResponse(Response):
     outputs: FirstExecutorOutputs
 
 class SecondExecutorRequest(Request):
-    inputs: Optional[SecondExecutorInputs]
+    inputs: SecondExecutorInputs
     configs: SecondExecutorConfigs
 
     class Config:
