@@ -163,7 +163,7 @@ class TransformOperation(Config):
 
     class Config:
         title = "Transformation Type"
-        schema_extra = {"target": "value"}
+        json_schema_extra = {"target": "value"}
 
 class BlurKernel(Config):
     name: Literal["kernel"] = "kernel"
