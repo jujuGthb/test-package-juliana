@@ -122,9 +122,6 @@ class RotateConfigs(Configs):
     angle: RotateAngle
     keepSize: KeepSize
 
-class ResizeConfigs(Configs):
-    scale: ResizeScale
-    method: ResizeInterpolation
 
 class RotateOption(Config):
     name: Literal["Rotate"] = "Rotate"
@@ -156,9 +153,13 @@ class ResizeInterpolation(Config):
     class Config:
         title = "Interpolation Method"
 
+class ResizeConfigs(Configs):
+    scale: ResizeScale
+    method: ResizeInterpolation
+
 class ResizeOption(Config):
     name: Literal["Resize"] = "Resize"
-    value: Union[ResizeScale, ResizeInterpolation]
+    value: ResizeConfigs
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
