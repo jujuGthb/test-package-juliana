@@ -195,9 +195,13 @@ class BlurNormalize(Config):
     class Config:
         title = "Normalize Result"
 
+class BlurConfigs(Configs):
+    kernel: BlurKernel
+    normalize: BlurNormalize
+
 class BlurOption(Config):
     name: Literal["Blur"] = "Blur"
-    value: Union[BlurKernel, BlurNormalize]
+    value: BlurConfigs
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
@@ -223,9 +227,13 @@ class SharpenClamp(Config):
     class Config:
         title = "Clamp Pixel Values"
 
+class SharpenConfigs(Configs):
+    strength: SharpenStrength
+    clamp: SharpenClamp
+
 class SharpenOption(Config):
     name: Literal["Sharpen"] = "Sharpen"
-    value: Union[SharpenStrength, SharpenClamp]
+    value: SharpenConfigs
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
