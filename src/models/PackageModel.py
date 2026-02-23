@@ -125,7 +125,7 @@ class RotateOption(Config):
 
     class Config:
         title = "Rotate Image"
-        schema_extra = {"target": "value"}
+        json_schema_extra = {"target": "value"}
 
 class ResizeScale(Config):
     name: Literal["scale"] = "scale"
@@ -153,7 +153,7 @@ class ResizeOption(Config):
 
     class Config:
         title = "Resize Image"
-        schema_extra = {"target": "value"}
+        json_schema_extra = {"target": "value"}
 
 class TransformOperation(Config):
     name: Literal["Transform"] = "Transform"
@@ -191,7 +191,7 @@ class BlurOption(Config):
 
     class Config:
         title = "Blur Filter"
-        schema_extra = {"target": "value"}
+        json_schema_extra = {"target": "value"}
 
 class SharpenStrength(Config):
     name: Literal["strength"] = "strength"
@@ -219,7 +219,7 @@ class SharpenOption(Config):
 
     class Config:
         title = "Sharpen Filter"
-        schema_extra = {"target": "value"}
+        json_schema_extra = {"target": "value"}
 
 class FilterOperation(Config):
     name: Literal["Filter"] = "Filter"
@@ -229,7 +229,7 @@ class FilterOperation(Config):
 
     class Config:
         title = "Filter Type"
-        schema_extra = {"target": "value"}
+        json_schema_extra = {"target": "value"}
 
 class FirstExecutorConfigs(Configs):
     transform: TransformOperation
@@ -242,7 +242,7 @@ class FirstExecutorRequest(Request):
     configs: FirstExecutorConfigs
 
     class Config:
-        schema_extra = {"target": "configs"}
+        json_schema_extra = {"target": "configs"}
 
 class FirstExecutorResponse(Response):
     outputs: FirstExecutorOutputs
@@ -252,7 +252,7 @@ class SecondExecutorRequest(Request):
     configs: SecondExecutorConfigs
 
     class Config:
-        schema_extra = {"target": "configs"}
+        json_schema_extra = {"target": "configs"}
 
 class SecondExecutorResponse(Response):
     outputs: SecondExecutorOutputs
@@ -265,7 +265,7 @@ class FirstExecutor(Config):
 
     class Config:
         title = "FirstExecutor"
-        schema_extra = {"target": {"value": 0}}
+        json_schema_extra = {"target": {"value": 0}}
 
 class SecondExecutor(Config):
     name: Literal["SecondExecutor"] = "SecondExecutor"
@@ -275,7 +275,7 @@ class SecondExecutor(Config):
 
     class Config:
         title = "SecondExecutor"
-        schema_extra = {"target": {"value": 0}}
+        json_schema_extra = {"target": {"value": 0}}
 
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
