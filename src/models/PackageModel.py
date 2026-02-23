@@ -114,18 +114,29 @@ class KeepSize(Config):
     type: Literal["bool"] = "bool"
     field: Literal["option"] = "option"
 
+
     class Config:
         title = "Keep Original Size"
 
+class RotateConfigs(Configs):
+    angle: RotateAngle
+    keepSize: KeepSize
+
+class ResizeConfigs(Configs):
+    scale: ResizeScale
+    method: ResizeInterpolation
+
 class RotateOption(Config):
     name: Literal["Rotate"] = "Rotate"
-    value: Union[RotateAngle, KeepSize]
+    value: RotateConfigs
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
     class Config:
         title = "Rotate Image"
         json_schema_extra = {"target": "value"}
+
+
 
 class ResizeScale(Config):
     name: Literal["scale"] = "scale"
