@@ -101,12 +101,15 @@ class SecondExecutorOutputs(Outputs):
 
 class RotateAngle(Config):
     name: Literal["angle"] = "angle"
-    value: Literal[0, 90, 180, 270] = 90
+    value: int= 90
     type: Literal["number"] = "number"
     field: Literal["selectBox"] = "selectBox"
 
     class Config:
         title = "Rotation Angle"
+        json_schema_extra = {
+            "enum": [0, 90, 180, 270]
+        }
 
 class KeepSize(Config):
     name: Literal["keepSize"] = "keepSize"
