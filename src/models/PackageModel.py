@@ -50,7 +50,7 @@ class OutputImage(Output):
     type: str = "object"
 
     @validator("type", pre=True, always=True)
-     def set_type_based_on_value(cls, value, values):
+    def set_type_based_on_value(cls, value, values):
         value = values.get('value')
         if isinstance(value, Image):
             return "object"
