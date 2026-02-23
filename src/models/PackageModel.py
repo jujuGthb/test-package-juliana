@@ -103,13 +103,11 @@ class RotateAngle(Config):
     name: Literal["angle"] = "angle"
     value: int= 90
     type: Literal["number"] = "number"
-    field: Literal["selectBox"] = "selectBox"
+    field: Literal["textInput"] = "textInput"
 
     class Config:
         title = "Rotation Angle"
-        json_schema_extra = {
-            "enum": [0, 90, 180, 270]
-        }
+        
 
 class KeepSize(Config):
     name: Literal["keepSize"] = "keepSize"
@@ -149,9 +147,9 @@ class ResizeScale(Config):
 
 class ResizeInterpolation(Config):
     name: Literal["method"] = "method"
-    value: Literal["nearest", "linear", "cubic"] = "linear"
+    value: str = "linear"
     type: Literal["string"] = "string"
-    field: Literal["selectBox"] = "selectBox"
+    field: Literal["textInput"] = "textInput"
 
     class Config:
         title = "Interpolation Method"
@@ -182,9 +180,9 @@ class TransformOperation(Config):
 
 class BlurKernel(Config):
     name: Literal["kernel"] = "kernel"
-    value: Literal["3x3", "5x5", "7x7"] = "3x3"
+    value: str= "3x3"
     type: Literal["string"] = "string"
-    field: Literal["selectBox"] = "selectBox"
+    field: Literal["textInput"] = "textInput"
 
     class Config:
         title = "Kernel Size"
