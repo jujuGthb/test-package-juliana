@@ -292,4 +292,4 @@ class PackageConfigs(Configs):
 class PackageModel(Package):
     name: Literal["ImageTransformFilter"] = "ImageTransformFilter"
     configs: PackageConfigs
-    type: Literal["capsule"] = "capsule"
+    type: Literal["component"] = "component"
