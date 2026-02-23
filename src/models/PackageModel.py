@@ -10,11 +10,13 @@ class InputImage(Input):
     type: str = "object"
 
     @validator("type", pre=True, always=True)
-    def detect_type(cls, v, values):
-        val = values.get("value")
-        if isinstance(val, list):
+    def set_type_based_on_value(cls, value, values):
+        value = values.get('value')
+        if isinstance(value, Image):
+            return "object"
+        elif isinstance(value, list):
             return "list"
-        return "object"
+
 
     class Config:
         title = "Image"
@@ -25,10 +27,12 @@ class InputImage2(Input):
     type: str = "object"
 
     @validator("type", pre=True, always=True)
-    def detect_type(cls, v, values):
-        if isinstance(values.get("value"), list):
+    def set_type_based_on_value(cls, value, values):
+        value = values.get('value')
+        if isinstance(value, Image):
+            return "object"
+        elif isinstance(value, list):
             return "list"
-        return "object"
 
     class Config:
         title = "Secondary Image"
@@ -46,11 +50,12 @@ class OutputImage(Output):
     type: str = "object"
 
     @validator("type", pre=True, always=True)
-    def detect_type(cls, v, values):
-        val = values.get("value")
-        if isinstance(val, list):
+     def set_type_based_on_value(cls, value, values):
+        value = values.get('value')
+        if isinstance(value, Image):
+            return "object"
+        elif isinstance(value, list):
             return "list"
-        return "object"
 
     class Config:
         title = "Transformed Image"
@@ -60,6 +65,14 @@ class OutputImage1(Output):
     value: Union[Image, List[Image]]
     type: str = "object"
 
+    @validator("type", pre=True, always=True)
+    def set_type_based_on_value(cls, value, values):
+        value = values.get('value')
+        if isinstance(value, Image):
+            return "object"
+        elif isinstance(value, list):
+            return "list"
+
     class Config:
         title = "Filtered Image"
 
@@ -67,6 +80,14 @@ class OutputImage2(Output):
     name: Literal["outputImage2"] = "outputImage2"
     value: Union[Image, List[Image]]
     type: str = "object"
+
+    @validator("type", pre=True, always=True)
+    def set_type_based_on_value(cls, value, values):
+        value = values.get('value')
+        if isinstance(value, Image):
+            return "object"
+        elif isinstance(value, list):
+            return "list"
 
     class Config:
         title = "Intermediate Output"
