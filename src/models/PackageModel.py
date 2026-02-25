@@ -176,7 +176,7 @@ class TransformOperation(Config):
 
     class Config:
         title = "Transformation Type"
-        json_schema_extra = {"target": "value"}
+
 
 class BlurKernel(Config):
     name: Literal["kernel"] = "kernel"
@@ -250,7 +250,7 @@ class FilterOperation(Config):
 
     class Config:
         title = "Filter Type"
-        json_schema_extra = {"target": "value"}
+       
 
 class FirstExecutorConfigs(Configs):
     transform: TransformOperation
