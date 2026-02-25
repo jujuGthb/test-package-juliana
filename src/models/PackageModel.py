@@ -100,7 +100,7 @@ class SecondExecutorOutputs(Outputs):
     outputImage2: OutputImage2
 
 class RotateAngle(Config):
-    name: Literal["angle"] = "angle"
+    name: Literal["Angle"] = "Angle"
     value: int= 90
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
