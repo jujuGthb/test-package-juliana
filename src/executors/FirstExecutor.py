@@ -21,7 +21,7 @@ class FirstExecutor(Component):
         super().__init__(request, bootstrap)
         self.request.model = PackageModel(**(self.request.data))
 
-        self.mode = self.request.get_param("transform")
+        self.mode = self.request.get_param("Transform")
         self.image = self.request.get_param("inputImage")
 
     @staticmethod
