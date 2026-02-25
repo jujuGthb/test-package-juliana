@@ -21,7 +21,7 @@ class SecondExecutor(Component):
         super().__init__(request, bootstrap)
         self.request.model = PackageModel(**(self.request.data))
 
-        self.mode = self.request.get_param("filter")
+        self.mode = self.request.get_param("Filter")
         self.image1 = self.request.get_param("inputImage")  
         self.image2 = self.request.get_param("inputImage2") 
 
