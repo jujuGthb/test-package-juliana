@@ -22,6 +22,13 @@ class FirstExecutor(Component):
         self.request.model = PackageModel(**(self.request.data))
 
         self.mode = self.request.get_param("Transform")
+        if self.mode == "Rotate":
+            angle = self.request.get_param("angle")
+        elif self.mode == "Resize":
+            scale = self.request.get_param("scale")
+            method = self.request.get_param("method")
+            
+        
         self.image = self.request.get_param("inputImage")
 
     @staticmethod
@@ -54,18 +61,18 @@ class FirstExecutor(Component):
         img=Image.get_frame(img=self.image, redis_db=self.redis_db)
 
         
-        if self.mode:
-            option_name = self.mode.get("name")
-            values = self.mode.get("value", {})
+        
+        
             
-            if option_name == "Rotate":
-                angle = values.get("angle", {}).get("value", 90)
-                img.value = self.rotate(img.value, angle)
-            elif option_name == "Resize":
-                scale = values.get("scale", {}).get("value", 1.0)
-                method = values.get("method", {}).get("value", "linear")
+        if self.mode == "Rotate":
+            angle = getattr(self, 'angle',90)
+            img.value = self.rotate(img.value, angle)
+        elif self.mode == "Resize":
+            scale = getattr(self, 'scale',90)
+            scale = getattr(self, 'scale',1.0)
+            method = getattr(self, 'method',"linear")
                 
-                img.value = self.resize(img.value, scale, method)
+            img.value = self.resize(img.value, scale, method)
                 
         
         self.image = Image.set_frame(img=img, package_uID=self.uID, redis_db=self.redis_db)
