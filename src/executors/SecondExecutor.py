@@ -22,6 +22,15 @@ class SecondExecutor(Component):
         self.request.model = PackageModel(**(self.request.data))
 
         self.mode = self.request.get_param("Filter")
+        
+        if self.mode == "Blur":
+            self.kernel = self.request.get_param("kernel")      
+            self.normalize = self.request.get_param("normalize") 
+        elif self.mode == "Sharpen":
+            self.strength = self.request.get_param("strength")  
+            self.clamp = self.request.get_param("clamp")
+        
+        
         self.image1 = self.request.get_param("inputImage")  
         self.image2 = self.request.get_param("inputImage2") 
 
@@ -46,35 +55,18 @@ class SecondExecutor(Component):
     def run(self):
     
         img1 = Image.get_frame(img=self.image1, redis_db=self.redis_db)
+        img2 = Image.get_frame(img=self.image2, redis_db=self.redis_db) if self.image2 else img1
+
         
         
-        if self.image2:
-            img2 = Image.get_frame(img=self.image2, redis_db=self.redis_db)
-        else:
-            img2 = img1 
-
-       
-        if self.mode:
-            option_name = self.mode.get("name")
-            params = self.mode.get("value", {})
-
-            if option_name == "Blur":
-                kernel = params.get("kernel", {}).get("value", "3x3")
-               
-                
-                print(f"[SecondExecutor] Blur kernel={kernel}")
-                
-                
-                img1.value = self.blur(img1.value, kernel)
-                img2.value = self.blur(img2.value, kernel)
-
-            elif option_name == "Sharpen":
-                strength = params.get("strength", {}).get("value", 1.0)
-                
-                print(f"[SecondExecutor] Sharpen strength={strength}")
-                
-                img1.value = self.sharpen(img1.value, strength)
-                img2.value = self.sharpen(img2.value, strength)
+        if self.mode == "Blur":
+            kernel = getattr(self, 'kernel', '3x3')
+            img1.value = self.blur(img1.value, kernel)
+            img2.value = self.blur(img2.value, kernel)
+        elif self.mode == "Sharpen":
+            strength = getattr(self, 'strength', 1.0)
+            img1.value = self.sharpen(img1.value, strength)
+            img2.value = self.sharpen(img2.value, strength)
 
       
         self.outputImage1 = Image.set_frame(img=img1, package_uID=f"{self.uID}_out1", redis_db=self.redis_db)
