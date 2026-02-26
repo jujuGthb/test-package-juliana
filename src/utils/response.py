@@ -1,5 +1,5 @@
 from sdks.novavision.src.helper.package import PackageHelper
-from components.GrayScaleFlipHorizontal.src.models.PackageModel import (
+from components.ImageTransformFilter.src.models.PackageModel import (
     PackageModel,
     PackageConfigs,
     ConfigExecutor,
